@@ -1,16 +1,28 @@
 const imageContainer = document.getElementById('image-container')
 const loader = document.getElementById('loader')
 
+let ready = false
+let imagesLoaded = 0
+let totalImages = 0
 let photosArray = []
 
 // Unsplash API
-const count = 10
+const count = 30
 const apiKey = '8AwK046-BjaeBFDcWwMKgt5sSGhs9R8OKPVHU_-tqhI'
 const collectionsId = '12196158,4260285,661099,989896'
 const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${count}&collections=${collectionsId}`
 
+// Check if all images were loaded
+const imageLoaded = () => {
+   imagesLoaded++
+   if (imagesLoaded === totalImages) {
+      ready = true
+      loader.hidden = true
+   }
+}
+
 // Helper Function to Set Attributes on DOM Elements
-function setAttributes(element, attributes) {
+const setAttributes = (element, attributes) => {
    for (const key in attributes) {
       element.setAttribute(key, attributes[key])
    }
@@ -18,6 +30,8 @@ function setAttributes(element, attributes) {
 
 // Create Elements For Links & Photos, add to DOM
 const displayPhotos = () => {
+   imagesLoaded = 0
+   totalImages = photosArray.length
    // Run function for each object in photosArray
    photosArray.forEach((photo) => {
       // Create <a> to link to Unsplash
@@ -34,6 +48,9 @@ const displayPhotos = () => {
          alt: photo.alt_description,
          title: photo.alt_description,
       })
+
+      // Event Listener, check when each is finished loading
+      img.addEventListener('load', imageLoaded)
 
       // Put <img> inside <a>, then put both inside imageContainer element
       item.appendChild(img)
@@ -54,10 +71,9 @@ async function getPhotos() {
 
 // Check to see if scrolling near bottom of page, Load more photos
 window.addEventListener('scroll', () => {
-   // console.log('scrolled')
-   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000) {
+   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000 && ready) {
+      ready = false
       getPhotos()
-      console.log('load more')
    }
 })
 

@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Grape+Nuts&display=swap');
-
+/*@import url('https://fonts.googleapis.com/css2?family=Grape+Nuts&display=swap');*/
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap');
 html {
   box-sizing: border-box;
 }
@@ -7,7 +7,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: Grape Nuts, sans-serif;
+  font-family: Fira Sans, sans-serif;
   background: whitesmoke;
 }
 
