@@ -5,12 +5,12 @@ let ready = false
 let imagesLoaded = 0
 let totalImages = 0
 let photosArray = []
+let imageCountToLoad = 5
 
 // Unsplash API
-let imageCountToLoad = 5
 const apiKey = '8AwK046-BjaeBFDcWwMKgt5sSGhs9R8OKPVHU_-tqhI'
 const collectionsId = '12196158,4260285,661099,989896'
-const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${count}&collections=${collectionsId}`
+const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${imageCountToLoad}&collections=${collectionsId}`
 
 // Check if all images were loaded
 const imageLoaded = () => {
